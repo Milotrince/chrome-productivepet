@@ -1,7 +1,7 @@
 <div align="center">
     <h1>Productive Pet</h1>
     <img src="images/icon_original.png" height="100" alt="icon"/>
-    <h3>A pet you take care of, and takes care of you</h3>
+    <h3>A pet you take care of, who takes care of you</h3>
 </div>
 
 ## Purpose
