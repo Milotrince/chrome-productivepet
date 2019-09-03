@@ -1,0 +1,40 @@
+{
+    "manifest_version": 2,
+    "name": "Productive Pet",
+    "version": "1.0",
+    "description": "A pet you take care of, who takes care of you.",
+
+    "permissions": [
+        "declarativeContent",
+        "tabs",
+        "storage",
+        "idle",
+        "unlimitedStorage"
+    ],
+    "background": {
+        "scripts": [
+            "js/jquery.min.js",
+            "js/background.js"
+        ],
+        "persistent": false
+    },
+    "options_page": "options.html",
+    "browser_action": {
+        "default_title": "Productive Pet",
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "assets/happy-16.png",
+            "32": "assets/happy-32.png",
+            "48": "assets/happy-48.png",
+            "128": "assets/happy-128.png"
+        }
+    },
+    "icons": {
+        "16": "assets/happy-16.png",
+        "32": "assets/happy-32.png",
+        "48": "assets/happy-48.png",
+        "128": "assets/happy-128.png"
+    },
+
+    "incognito": "not_allowed"
+}

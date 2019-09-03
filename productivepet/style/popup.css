@@ -1,0 +1,38 @@
+body {
+    text-align: center;
+}
+
+#pet-space {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    background-color: pink;
+    margin-bottom: 0;
+}
+
+#pet-face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    margin-left: -50px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#pet-body {
+    position: absolute;
+    width: 100px;
+    top: 75px;
+    left: 50%;
+    margin-left: -50px;
+    z-index: 1;
+}
+
+#message-space {
+    padding-bottom: 10px;
+    width: 200px;
+    height: 40px;
+    font-size: 24px;
+    line-height: 24px;
+}

@@ -1,0 +1,54 @@
+body {
+    background-color: pink;
+}
+
+.centered {
+	position: absolute;
+    width: 600px;
+    height: 300px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    margin: auto;
+    
+    display: grid;
+    grid-template-areas: "left right";
+}
+
+#pet-space {
+    grid-area: "left";
+    background-color: pink;
+    width: 300px;
+}
+
+#pet-face {
+    position: absolute;
+    width: 256px;
+    height: 256px;
+    z-index: 2;
+}
+
+#pet-body {
+    position: absolute;
+    width: 256px;
+    top: 200px;
+    z-index: 1;
+}
+
+#menu-space {
+    grid-area: "right";
+    width: 300px;
+}
+
+#prompt {
+    margin-bottom: 10px;
+}
+
+#message {
+    font-size: 1.2em;
+}
+
+#buttons {
+    margin-top: 10px;
+}
