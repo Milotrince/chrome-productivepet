@@ -23,17 +23,17 @@
         "default_title": "Productive Pet",
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "assets/happy-16.png",
-            "32": "assets/happy-32.png",
-            "48": "assets/happy-48.png",
-            "128": "assets/happy-128.png"
+            "16": "assets/icon/icon-16.png",
+            "32": "assets/icon/icon-32.png",
+            "48": "assets/icon/icon-48.png",
+            "128": "assets/icon/icon-128.png"
         }
     },
     "icons": {
-        "16": "assets/happy-16.png",
-        "32": "assets/happy-32.png",
-        "48": "assets/happy-48.png",
-        "128": "assets/happy-128.png"
+        "16": "assets/icon/icon-16.png",
+        "32": "assets/icon/icon-32.png",
+        "48": "assets/icon/icon-48.png",
+        "128": "assets/icon/icon-128.png"
     },
 
     "incognito": "not_allowed"

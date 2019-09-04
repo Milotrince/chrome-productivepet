@@ -1,6 +1,6 @@
 "use strict";
 
-const moods = ['bored', 'disgust', 'excited', 'happy', 'sad', 'sorry', 'stare', 'surprised']
+const moods = ['bored', 'confused', 'disgust', 'excited', 'happy', 'inform', 'sad', 'sorry', 'stare', 'surprised']
 
 class Cat {
 
@@ -10,27 +10,7 @@ class Cat {
 
     setMood(mood) {
         this.mood = mood;
-        $('#pet-face').attr('src', './assets/' + mood + '.png');
-    }
-
-    saveMood() {
-        chrome.storage.sync.set({mood: mood}, function() {
-            console.log("Saved mood: " + mood);
-        });
-    }
-
-    getMood() {
-        chrome.storage.sync.get('mood', function(data) {
-            console.log("Cat is " + data.mood);
-        });
-    }
-    
-    getSettings(name, callback) {
-        chrome.storage.local.get(name, function (item) {
-            if (item !== undefined) {
-                callback(item[name]);
-            }
-        });
+        $('#pet-face').attr('src', './assets/cat/' + mood + '.png');
     }
     
 }
