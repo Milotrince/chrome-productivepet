@@ -4,10 +4,6 @@ const moods = ['bored', 'confused', 'disgust', 'excited', 'happy', 'inform', 'sa
 
 class Cat {
 
-    constructor(mood = this.getMood()) {
-        this.mood = mood;
-    }
-
     setMood(mood) {
         this.mood = mood;
         $('#pet-face').attr('src', './assets/cat/' + mood + '.png');

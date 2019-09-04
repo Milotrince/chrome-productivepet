@@ -3,25 +3,49 @@
 let cat = new Cat();
 let menu = {
     'back': {
-        mood: ['stare'],
-        prompt: ['What brings you here?'],
-        menu: function() {
-            setMessage();
+        mood: ['stare', 'inform'],
+        prompt: ['What brings you here?', 'What did you want to do?'],
+        action: function() {
+            setContent();
+            loadColor();
         },
-        buttons: ['Display', 'Data', 'Chat', 'About']
+        buttons: ['Color', 'Data', 'Chat', 'About']
     },
-    'Display': {
-        mood: ['happy'],
-        prompt: ['Change display'],
-        menu: function() {
-            
+    'Color': {
+        mood: ['excited', 'happy'],
+        prompt: ['Pick a color, any color!', 'Change the background color'],
+        action: function() {
+            setContent(`
+                <input id="input-color" type="range" min="0" max="360" step="1"/>
+                <button id="save-color">Save?</button>
+            `)
+
+            chrome.storage.sync.get('color', function (data) {
+                if (data['color'] !== undefined) {
+                    $('#input-color').val(data['color'])
+                }
+            });
+
+            $('#input-color').on('input', function() {
+                $('#save-color').text('Save?')
+                $('body').css('--hue', $('#input-color').val());
+            });
+
+            $('#save-color').click(function() {
+                let hue = $('#input-color').val();
+                chrome.storage.sync.set({color: hue}, function() {
+                    console.log(`Saved color hue: ${hue}`);
+                });
+
+                $('#save-color').text('Saved!')
+            });
         },
         buttons: ['back']
     },
     'Data': {
         mood: ['happy'],
         prompt: ['View data'],
-        menu: function() {
+        action: function() {
             
         },
         buttons: ['back']
@@ -29,7 +53,7 @@ let menu = {
     'Chat': {
         mood: ['happy'],
         prompt: ['Talk to me'],
-        menu: function() {
+        action: function() {
             
         },
         buttons: ['back']
@@ -37,8 +61,8 @@ let menu = {
     'About': {
         mood: ['happy', 'excited'],
         prompt: ['About ProductivePet', 'All about me!'],
-        menu: function() {
-            setMessage(`
+        action: function() {
+            setContent(`
                 My purpose is to help you reduce unproductive time.
                 Check me out on <a href="https://github.com/Milotrince/chrome-productivepet">
                 GitHub</a>!
@@ -54,7 +78,7 @@ function setMenu(menu) {
     cat.setMood(menu.mood[i]);
 
     $('#prompt').text(menu.prompt[i]);
-    menu.menu();
+    menu.action();
     makeButtons(menu.buttons);
 }
 
@@ -69,9 +93,9 @@ function makeButtons(buttons) {
     }
 }
 
-function setMessage(message) {
-    $('#message').empty();
-    $('#message').append(message);
+function setContent(content) {
+    $('#content').empty();
+    $('#content').append(content);
 }
 
 setMenu(menu.back);

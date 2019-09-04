@@ -1,5 +1,5 @@
 body {
-    background-color: pink;
+    background-color: hsl(var(--hue), 100%, 88%);
 }
 
 .centered {
@@ -18,7 +18,6 @@ body {
 
 #pet-space {
     grid-area: "left";
-    background-color: pink;
     width: 300px;
 }
 
@@ -51,4 +50,52 @@ body {
 
 #buttons {
     margin-top: 10px;
+}
+
+
+
+
+:focus {
+    outline:0;
+}
+  
+#input-color {
+    border: none;
+    box-sizing: border-box;
+    background-clip: border-box;
+    outline: none;
+    -webkit-appearance: none;
+
+    background-image: linear-gradient(to right,
+        hsl(0, 100%, 50%),
+        hsl(60, 100%, 50%),
+        hsl(120, 100%, 50%),
+        hsl(180, 100%, 50%),
+        hsl(240, 100%, 50%),
+        hsl(360, 100%, 50%) );
+
+    border-radius: 10px;
+    padding: 0;
+    margin: 10px 10px;
+    height: 36px;
+    width: 200px;
+    box-shadow: 0 0 1px 6px black;
+}
+
+#input-color::-webkit-slider-thumb {
+    cursor: pointer;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    padding: 0;
+    margin: 10px 10px;
+    height: 36px;
+    width: 10px;
+    transform: translateX(-10px);
+    border: none;
+    box-shadow: 0 0 1px 6px black;
+    background-color: white;
+}
+
+#input-color:active::-webkit-slider-thumb {
+    box-shadow: 0 0 1px 6px hsl(var(--hue), 70%, 60%);
 }

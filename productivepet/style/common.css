@@ -1,3 +1,7 @@
+:root {
+  --hue: 0;
+}
+
 @font-face {
   font-family: 'Patrick Hand';
   src: url('fonts/Patrick_Hand/PatrickHand-Regular.ttf');
@@ -26,7 +30,7 @@ button {
 
 button:focus {
   outline: 0;
-  box-shadow: 0 0 1px 6px #e05068;
+  box-shadow: 0 0 1px 6px hsl(var(--hue), 70%, 60%);
 }
 
 h1 {
