@@ -14,6 +14,8 @@
     "background": {
         "scripts": [
             "js/jquery.min.js",
+            "js/storage.js",
+            "js/webhistory.js",
             "js/background.js"
         ],
         "persistent": false

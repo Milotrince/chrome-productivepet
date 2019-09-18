@@ -1,6 +1,7 @@
 "use strict";
 
 let cat = new Cat();
+
 let menu = {
     'back': {
         mood: ['stare', 'inform'],
@@ -20,24 +21,19 @@ let menu = {
                 <button id="save-color">Save?</button>
             `)
 
-            chrome.storage.sync.get('color', function (data) {
-                if (data['color'] !== undefined) {
-                    $('#input-color').val(data['color'])
-                }
+            Storage.get('color', function (hue) {
+                $('#input-color').val(hue);
             });
 
             $('#input-color').on('input', function() {
-                $('#save-color').text('Save?')
+                $('#save-color').text('Save?');
                 $('body').css('--hue', $('#input-color').val());
             });
 
             $('#save-color').click(function() {
                 let hue = $('#input-color').val();
-                chrome.storage.sync.set({color: hue}, function() {
-                    console.log(`Saved color hue: ${hue}`);
-                });
-
-                $('#save-color').text('Saved!')
+                Storage.set({color:hue});
+                $('#save-color').text('Saved!');
             });
         },
         buttons: ['back']
@@ -46,7 +42,18 @@ let menu = {
         mood: ['happy'],
         prompt: ['View data'],
         action: function() {
-            
+            setContent(`
+                <textarea id='data' cols=50 rows=20></textarea>
+                Data used: <span id='memory'></span> 
+            `);
+            Storage.get('webhistory', function(data) {
+                $('#data').text(JSON.stringify(data, null, 2));
+            });
+            Storage.getMemoryUsed(function(bytes) {
+                let i = Math.floor(Math.log(bytes) / Math.log(1024));
+                let text = (bytes / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+                $('#memory').text(text);
+            });
         },
         buttons: ['back']
     },

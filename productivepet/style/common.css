@@ -7,6 +7,11 @@
   src: url('fonts/Patrick_Hand/PatrickHand-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('fonts/Source_Code_Pro/SourceCodePro-Regular.ttf');
+}
+
 header {
   font-family: 'Patrick Hand';
 }

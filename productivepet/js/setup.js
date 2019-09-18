@@ -1,6 +1,7 @@
 "use strict";
 
 let cat = new Cat();
+
 let index = 0;
 let menu = {
     0: {
@@ -26,10 +27,8 @@ let menu = {
                 <input id="input-color" type="range" min="0" max="360" step="1"/>
             `)
 
-            chrome.storage.sync.get('color', function (data) {
-                if (data['color'] !== undefined) {
-                    $('#input-color').val(data['color'])
-                }
+            Storage.get('color', function (hue) {
+                $('#input-color').val(hue)
             });
 
             $('#input-color').on('input', function() {
@@ -38,9 +37,7 @@ let menu = {
 
             $('#input-color').change('input', function() {
                 let hue = $('#input-color').val();
-                chrome.storage.sync.set({color: hue}, function() {
-                    console.log(`Saved color hue: ${hue}`);
-                });
+                Storage.set({color:hue});
             });
         },
         buttons: ['This one!']
