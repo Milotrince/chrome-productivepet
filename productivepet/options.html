@@ -10,25 +10,33 @@
 
   <body class="bg-color">
     <div class="centered">
+      <div class="grid">
 
-      <div id="pet-space">
-        <img src='/assets/cat/bored.png' id='pet-face'>
-        <img src='/assets/cat/body.png' id='pet-body'>
-      </div>
-      
-      <div id="menu-space">
+        <div id="pet-space">
+          <img src='/assets/cat/bored.png' id='pet-face'>
+          <img src='/assets/cat/body.png' id='pet-body'>
+        </div>
+        
+        <div id="menu-space">
           <h1 id="prompt"></h1>
           <div id="content"></div>
           <div id="buttons"></div>
+        </div>
+      </div>
+
+      <div id="info-space">
+        <!-- timeline -->
       </div>
       
     </div>
   </body>
 
   <script src="js/jquery.min.js"></script>
+  <script src="js/d3.min.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/colors.js"></script>
   <script src="js/cat.js"></script>
+  <script src="js/timeline.js"></script>
   <script src="js/options.js"></script>
   
 </html>

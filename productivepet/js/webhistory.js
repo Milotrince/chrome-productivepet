@@ -11,44 +11,49 @@
 
 class WebHistory {
 
-    update(tab) {
-        var tabUrl = domain(tab.url);
-        var tabIcon = tab.favIconUrl;
+    constructor() {
+        this.current = {};
+    }
 
-        Storage.get('webhistory', function(history) {
-            let lastUrl = history.length > 0 ? history[history.length - 1]['url'] : ''; 
-            if (lastUrl != tabUrl) {
-                Storage.update('webhistory', {
-                    url: tabUrl,
-                    start: Date.now()
-                });
-            }
-        });
+    update(tab) {
+        var tabUrl = WebHistory.domain(tab);
+
+        if (!this.current.url) {
+            this.current.url = tabUrl;
+            this.current.start = Date.now();
+        }
+        else if (this.current.url != tabUrl) {
+            this.current.end = Date.now();
+            Storage.update('webhistory', this.current);
+
+            this.current = {}; // THIS LINE IS IMPORTANT... without it, newData != newData inside Storage
+            this.current.url = tabUrl;
+            this.current.start = Date.now();
+        }
+        else if (this.current.url == tabUrl) {
+            return
+        }
 
         Storage.get('webicons', function(icons) {
             if (!Object.keys(icons).includes(tabUrl)) {
                 let d = {}
-                d[tabUrl] = tabIcon; 
+                d[tabUrl] = tab.favIconUrl;
                 Storage.update('webicons', d);
             }
         })
    }
-    
-}
 
-function todayId() {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
-    return mm + '-' + dd + '-' + yyyy;
-}
+    idle() {
+        if (!!this.current.url) {
+            this.current.end = Date.now();
+            Storage.update('webhistory', this.current);
+            this.current = {};
+        }
 
-function domain(url) {
-    if (url.startsWith('chrome')) {
-        let a = url.split('://')[0];
-        let b = url.split('://')[1].split('/')[0];
-        return `${a}://${b}`;
     }
-    return (new URL(url)).hostname;
+
+    static domain(tab) {
+        return tab.url.startsWith('chrome') ? tab.title : (new URL(tab.url)).hostname;
+    }
+    
 }

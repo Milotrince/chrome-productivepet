@@ -8,8 +8,7 @@
         "declarativeContent",
         "tabs",
         "storage",
-        "idle",
-        "unlimitedStorage"
+        "idle"
     ],
     "background": {
         "scripts": [

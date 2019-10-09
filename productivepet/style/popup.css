@@ -1,5 +1,32 @@
 body {
     text-align: center;
+    background-color: hsl(var(--hue), 100%, 88%);
+}
+
+nav {
+    position: absolute;
+    width: 200px;
+    font-size: 0.8em;
+    z-index: 2;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    float: right;
+    padding: 2px; 
+}
+
+nav ul li img {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
 }
 
 #pet-space {
@@ -7,7 +34,6 @@ body {
     width: 200px;
     height: 100px;
     margin-bottom: 0;
-    background-color: hsl(var(--hue), 100%, 88%);
 }
 
 #pet-face {
@@ -30,9 +56,20 @@ body {
 }
 
 #message-space {
-    padding-bottom: 10px;
+    padding-bottom: 6px;
     width: 200px;
     height: 40px;
     font-size: 24px;
     line-height: 24px;
+}
+
+.floor {
+    position: absolute;
+    background-color: white;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 104px;
+    border-top: solid 4px;
+    z-index: -1;
 }

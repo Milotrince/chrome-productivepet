@@ -40,22 +40,41 @@ let menu = {
     },
     'Data': {
         mood: ['happy'],
-        prompt: ['View data'],
+        prompt: ['Data'],
         action: function() {
             setContent(`
-                <textarea id='data' cols=50 rows=20></textarea>
-                Data used: <span id='memory'></span> 
+                Here you can view your web history and other stuff I'm keeping track of.
+                <br/> Memory used: <span id='memory'></span>
             `);
-            Storage.get('webhistory', function(data) {
-                $('#data').text(JSON.stringify(data, null, 2));
-            });
+            setInfo(`<h1>Timeline</h1> <svg/>`)
+
             Storage.getMemoryUsed(function(bytes) {
                 let i = Math.floor(Math.log(bytes) / Math.log(1024));
                 let text = (bytes / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
                 $('#memory').text(text);
             });
+
+            Storage.get('webhistory', function (webhistory) {
+                Storage.get('webicons', function (webicons) {
+                    let timeline = new Timeline(webhistory, webicons)
+                    timeline.draw()
+                })
+            })
         },
-        buttons: ['back']
+        buttons: ['Raw', 'back']
+    },
+    'Raw': {
+        mood: ['confused'],
+        prompt: ['Raw data'],
+        action: function() {
+            setContent(`
+                <textarea id='data' cols=50 rows=20></textarea>
+            `);
+            Storage.getAll(function(data) {
+                $('#data').text(JSON.stringify(data, null, 2));
+            }, true);
+        },
+        buttons: ['Data', 'back']
     },
     'Chat': {
         mood: ['happy'],
@@ -83,8 +102,9 @@ function setMenu(menu) {
     // i = random index of prompt
     let i = Math.floor(Math.random() * menu.prompt.length);
     cat.setMood(menu.mood[i]);
-
     $('#prompt').text(menu.prompt[i]);
+    $('#info-space').empty();
+    $('#content').empty();
     menu.action();
     makeButtons(menu.buttons);
 }
@@ -101,8 +121,11 @@ function makeButtons(buttons) {
 }
 
 function setContent(content) {
-    $('#content').empty();
     $('#content').append(content);
+}
+
+function setInfo(info) {
+    $('#info-space').append(info)
 }
 
 setMenu(menu.back);

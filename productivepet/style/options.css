@@ -11,7 +11,10 @@ body {
 	left: 0;
 	right: 0;
     margin: auto;
-    
+
+}
+
+.grid {
     display: grid;
     grid-template-areas: "left right";
 }
@@ -46,6 +49,10 @@ body {
 
 #message {
     font-size: 1.2em;
+}
+
+#info-space {
+    position: relative;
 }
 
 #buttons {
@@ -107,4 +114,14 @@ textarea {
 
 #input-color:active::-webkit-slider-thumb {
     box-shadow: 0 0 1px 6px hsl(var(--hue), 70%, 60%);
+}
+
+div#tooltip {	
+    position: absolute;			
+    padding: 8px;				
+    font-size: 0.8em;
+    background: white;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;			
 }

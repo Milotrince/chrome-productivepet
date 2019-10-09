@@ -1,21 +1,27 @@
 "use strict";
 
 // to view all stored data raw:
-// chrome.storage.sync.get(function(result){console.log(result)})
+// chrome.storage.local.get(function(result){console.log(result)})
 // inside of background devtool
 
 class Storage {
 
     static get(key, callback, callIfUndefined=false) {
-        chrome.storage.sync.get(key, function (data) {
+        chrome.storage.local.get(key, function (data) {
             if (data[key] !== undefined || callIfUndefined) {
                 callback(data[key]);
             }
         });
     }
 
-    static set(data, debug=true) {
-        chrome.storage.sync.set(data, function() {
+    static getAll(callback) {
+        chrome.storage.local.get(null, function(data) {
+            callback(data);
+        })
+    }
+
+    static set(data, debug=false) {
+        chrome.storage.local.set(data, function() {
             if (debug) {
                 console.log('saved: ' + JSON.stringify(data))
             }
@@ -43,6 +49,6 @@ class Storage {
     }
 
     static getMemoryUsed(callback) {
-        chrome.storage.sync.getBytesInUse(null, callback);
+        chrome.storage.local.getBytesInUse(null, callback);
     }
 }

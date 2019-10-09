@@ -7,4 +7,6 @@ $('#pet-face').click(function() {
     cat.setMood(mood);
 });
 
-  
+ $('#options').click(function() {
+    chrome.tabs.create({url: chrome.extension.getURL('options.html')});
+ }) 
