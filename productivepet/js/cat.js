@@ -1,8 +1,12 @@
 "use strict";
 
-const moods = ['bored', 'confused', 'disgust', 'excited', 'happy', 'inform', 'sad', 'sorry', 'stare', 'surprised']
-
 class Cat {
+
+    constructor() {
+        this.moods = ['bored', 'confused', 'disgust', 'excited', 'happy',
+                 'inform', 'sad', 'sorry', 'stare', 'surprised'];
+        this.mood = 'happy';
+    }
 
     setMood(mood) {
         this.mood = mood;
