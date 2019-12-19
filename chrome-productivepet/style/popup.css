@@ -73,3 +73,30 @@ nav ul li img {
     border-top: solid 4px;
     z-index: -1;
 }
+
+.stuffs img {
+    position: absolute;
+    z-index: 3;
+}
+
+.stuffs img:hover {
+    filter: drop-shadow(0 0 8px hsla(var(--hue), 100%, 50%, 100%));
+    cursor: pointer;
+}
+
+#folder {
+    transform: translate(60px, -30px);
+}
+
+#graph {
+    transform: translate(-105px, -50px);
+}
+
+#book {
+    transform: translate(-30px, -15px);
+    z-index: 0;
+}
+
+#yarn {
+    transform: translate(-80px, -25px);
+}

@@ -8,9 +8,9 @@ class Timeline {
  
         this.margin = {
             top: 10,
-            right: 15,
+            right: 20,
             bottom: 50,
-            left: 20
+            left: 0
         }
         this.laneHeight = 30;
         this.tooltip = d3.select("body").append("div")
@@ -38,7 +38,7 @@ class Timeline {
             .range([0, height]);
 
         var chart = d3.select("svg")
-            .attr("width", width)
+            .attr("width", width + this.margin.left + this.margin.right)
             .attr("height", height + this.margin.top + this.margin.bottom)
             .attr("class", "chart");
 
@@ -59,9 +59,8 @@ class Timeline {
             .data(dates)
             .enter().append("text")
             .text((d) => {return d})
-            .attr("x", 50)
+            .attr("x", this.margin.left)
             .attr("y", (d, i) => {return yScale(i) + this.laneHeight / 2 + this.margin.top;})
-            .attr("text-anchor", "end")
             .attr("class", "lanetext");
 
         //chart item rects
@@ -87,7 +86,44 @@ class Timeline {
             .attr("height", 20)
             .attr("width", 20)
 
+        //brush
+        var brush = d3.brushX()
+            .extent([[0, 0], [width, this.laneHeight]])
+            .on("start", startBrush)
+            .on("brush", brushed)
+            .on("end", endBrush)
 
+        chart.append("g")
+            .attr("class", "brush")
+            .call(brush)
+
+        function startBrush() {
+            console.log("start brush")
+            var tooltip = d3.select("#tooltip")
+            tooltip
+                .transition()
+                .duration(200)
+                .style("opacity", .9);
+            tooltip.html(`brush content`)
+                .style("left", (d3.event.pageX + 5) + "px")
+                .style("top", (d3.event.pageY) + "px");
+        }
+
+        function brushed() {
+            console.log("brushed")
+        }
+
+        function endBrush() {
+            console.log("end brush")
+            var tooltip = d3.select("#tooltip")
+            tooltip.transition()
+                .duration(300)
+                .style("opacity", 0);
+        }
+
+        function idled() {
+            idleTimeout = null;
+        }
     }
 
     hoverIn(d, t) {

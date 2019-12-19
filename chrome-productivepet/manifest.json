@@ -8,12 +8,17 @@
         "declarativeContent",
         "tabs",
         "storage",
-        "idle"
+        "idle",
+        "notifications",
+        "http://*/*",
+        "https://*/*"
     ],
     "background": {
         "scripts": [
-            "js/jquery.min.js",
+            "js/libs/jquery.min.js",
             "js/storage.js",
+            "js/cat.js",
+            "js/watcher.js",
             "js/webhistory.js",
             "js/background.js"
         ],

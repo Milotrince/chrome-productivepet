@@ -1,6 +1,6 @@
 "use strict";
 
-let catPage = new CatPage('linear');
+let catPage = new LinearCatPage();
 catPage.menu = {
     0: {
         mood: ['happy'],
@@ -41,7 +41,6 @@ catPage.menu = {
         mood: ['happy'],
         prompt: ['What sites should I be warning you on?'],
         content: `<textarea id="sites" cols=30 rows=10
-            style="width:100%; height:100px;"
             placeholder="For example, I would put:\nreddit.com\nyoutube.com\n..."></textarea>`,
         buttons: ['Done!'],
         onButton: function() {

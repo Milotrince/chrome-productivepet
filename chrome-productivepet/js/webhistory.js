@@ -1,14 +1,5 @@
 "use strict";
 
-// let data = [
-//     {
-//         'start': 10,
-//         'end': 100,
-//         'site': 'https://site.com',
-//     }
-// ]
-
-
 class WebHistory {
 
     constructor() {
@@ -29,6 +20,8 @@ class WebHistory {
             this.current = {}; // THIS LINE IS IMPORTANT... without it, newData != newData inside Storage
             this.current.url = tabUrl;
             this.current.start = Date.now();
+
+            Watcher.notify(tab);
         }
         else if (this.current.url == tabUrl) {
             return
@@ -49,11 +42,14 @@ class WebHistory {
             Storage.update('webhistory', this.current);
             this.current = {};
         }
-
     }
 
     static domain(tab) {
-        return tab.url.startsWith('chrome') ? tab.title : (new URL(tab.url)).hostname;
+        return tab.url.startsWith('chrome') ? tab.title : this.extractDomain(tab.url);
+    }
+
+    static extractDomain(url) {
+        return (new URL(url)).hostname;
     }
     
 }
