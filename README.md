@@ -1,6 +1,6 @@
 <div align="center">
     <h1>Productive Pet</h1>
-    <img src="productivepet/assets/cat/happy.png" height="100" alt="icon"/>
+    <img src="chrome-productivepet/assets/icon/icon-128.png" height="128" alt="icon"/>
     <h3>Cat takes care of you.</h3>
 </div>
 
